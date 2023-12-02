@@ -1,8 +1,8 @@
 const fs = require('fs');
-const file = fs.readFileSync('day2/input.txt', 'utf8').split('\n')
+const file = fs.readFileSync('day2/input.txt', 'utf8').split('\n');
 
 //p1
-let total = 0;
+var total = 0;
 var limit = {'red' : 12, 'green' : 13, 'blue' : 14};
 file.forEach(line => {
     var pass = 1;
@@ -23,7 +23,7 @@ file.forEach(line => {
 console.log(total);
 
 //p2
-let total2 = 0;
+var total = 0;
 file.forEach(line => {
     var max = {'red' : 0, 'green' : 0, 'blue' : 0};
     line.substr(5).split(':')[1].replaceAll(';', ',').split(',').forEach(r => {
@@ -33,7 +33,7 @@ file.forEach(line => {
         }
     });
 
-    total2 += max['red'] * max['green'] * max['blue'];
+    total += max['red'] * max['green'] * max['blue'];
 });
 
-console.log(total2);
+console.log(total);
