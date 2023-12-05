@@ -23,21 +23,6 @@ seeds.forEach(seed => {
 console.log(location);
 
 //p2 
-// var small = [];
-// for (const [index, map] of maps.reverse().entries()) {
-//     if (small.length == 0) {
-//         small.push(map.sort((a, b) => a[0] - b[0])[0]);
-//         continue;
-//     }
-
-//     var tempMaps = [];
-//     for (const m of map) {
-//         for (const n of small[index - 1]) {
-            
-//         }
-//     }
-// }
-
 const seedRanges = [];
 for (let i = 0; i < seeds.length; i += 2) {
     seedRanges.push([seeds[i], seeds[i + 1]]);
@@ -57,7 +42,7 @@ seedRanges.forEach(([start, length]) => {
 
         if (!location || location > seed) {
             location = seed;
-            console.log(location);
+            console.log(start + i, location);
         }
     }
 });
