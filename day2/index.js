@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const file = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split('\n');
+const file = fs.readFileSync(`inputs/${__dirname.split('\\').pop()}.txt`, 'utf8').split('\n');
 
 //p1
 var total = 0;

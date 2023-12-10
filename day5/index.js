@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const data = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split(/\n\s*\n/);
+const data = fs.readFileSync(`inputs/${__dirname.split('\\').pop()}.txt`, 'utf8').split(/\n\s*\n/);
 
 const seeds = data[0].trim().split(' ').slice(1).map(Number);
 const maps = data.slice(1).map(map => map.trim().split('\n').slice(1).map(row => row.split(' ').map(Number)));
@@ -42,7 +42,7 @@ seedRanges.forEach(([start, length]) => {
 
         if (!location || location > seed) {
             location = seed;
-            console.log(start + i, location);
+            console.log(`seed: ${start + i}, location: ${location}`);
         }
     }
 });

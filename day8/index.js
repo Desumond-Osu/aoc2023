@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const file = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split('\r\n');
+const file = fs.readFileSync(`inputs/${__dirname.split('\\').pop()}.txt`, 'utf8').split('\r\n');
 
 const input = file[0].split('');
 var routes = {};

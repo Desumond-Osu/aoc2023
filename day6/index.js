@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const file = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split('\n');
+const file = fs.readFileSync(`inputs/${__dirname.split('\\').pop()}.txt`, 'utf8').split('\n');
 const line = file.map(line => line.trim().split(/\s+/).slice(1).map(Number));
 
 //p1

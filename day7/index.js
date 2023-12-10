@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const file = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split('\r\n');
+const file = fs.readFileSync(`inputs/${__dirname.split('\\').pop()}.txt`, 'utf8').split('\r\n');
 
 //p1
 const cardMap = {'2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7, '9': 8, 'T': 9, 'J': 10, 'Q': 11, 'K': 12, 'A': 13};
