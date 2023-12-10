@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const data = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split(/\n\s*\n/);
 
 const seeds = data[0].trim().split(' ').slice(1).map(Number);

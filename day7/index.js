@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const file = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split('\r\n');
 
 //p1
