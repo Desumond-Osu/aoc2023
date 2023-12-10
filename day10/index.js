@@ -64,10 +64,11 @@ console.log(length / 2);
 //p2
 //find all points that lies in polygon
 var total = 0;
+var check = new Set(pathTaken.map(([x, y]) => `${x}.${y}`));
 for (const [x, pipeX] of map.entries()) {
-    for (const [y,] of pipeX.entries()) {
+    for (const y of pipeX.keys()) {
         //if point lies on polygon, continue
-        if (JSON.stringify(pathTaken).indexOf(JSON.stringify([x, y])) != -1) {
+        if (check.has(`${x}.${y}`)) {
             continue;
         }
 
