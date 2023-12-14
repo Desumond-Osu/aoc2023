@@ -10,7 +10,10 @@ function rotateCounterC(arr) {
 }
 
 function pullOToLeft(arr) {
-    return arr.map(row => row.split('#').map(part => Array(part.length).fill('.').fill('O', 0, (part.match(/O/g) || []).length).join('')).join('#'))
+    return arr.map(row => row.split('#').map(part => {
+        const lenO = (part.match(/O/g) || []).length;
+        return 'O'.repeat(lenO) + '.'.repeat(part.length - lenO);
+    }).join('#'))
 }
 
 function getTotalO(arr) {
