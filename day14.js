@@ -19,7 +19,6 @@ platform = pullOToLeft(platform);
 platform = rotateC(platform);
 console.log(platform.reduce((acc, val, index) => acc + (val.match(/O/g) || []).length * (platform[0].length - index), 0));
 
-
 //p2
 var platform = rotateC(rotateC(file)); //rotate 180
 const log = [];
