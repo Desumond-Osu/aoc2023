@@ -1,7 +1,7 @@
 //inspiration from https://www.reddit.com/r/adventofcode/comments/18luw6q/2023_day_17_a_longform_tutorial_on_day_17/
 
 const fs = require('node:fs');
-const file = fs.readFileSync(`inputs/${__filename.split('/').pop().split('.')[0].split('p')[0]}.txt`, 'utf8').split('\n');
+const file = fs.readFileSync(require('path').join(__dirname, 'inputs', `${require('path').basename(__filename, '.js').split('p')[0]}.txt`), 'utf8').split(/\r?\n/);
 
 const map = file.map(line => line = line.split('').map(Number));
 
