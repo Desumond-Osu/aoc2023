@@ -40,3 +40,84 @@ partList.forEach(parts => {
 console.log(total);
 
 //p2
+const inequalities = [];
+
+function swapSign(rule) {
+    return rule.replace(/(<=?|>=?)/, match => {
+        switch (match) {
+            case '<': return '>=';
+            case '<=': return '>';
+            case '>': return '<=';
+            case '>=': return '<';
+        }
+    });
+}
+
+(function rec(name, history) {
+    if (name == 'R') {
+        return;
+    }
+
+    if (name == 'A') {
+        inequalities.push(history);
+        return;
+    }
+
+    for (const rule of workflows[name]) {
+        if (rule.length == 1) {
+            rec(rule[0], history);
+        }
+
+        if (rule.length == 2) {
+            let newHistory = [...history, rule[0]];
+            rec(rule[1], newHistory);
+            history.push(swapSign(rule[0]));
+            continue;
+        }
+    }
+})('in', []);
+
+function parse(inequality) {
+    let match = inequality.match(/^([a-z])([<>]=?)(\d+)$/);
+    if (!match) {
+        return null
+    };
+    
+    let [_, rating, op, value] = match;
+    value = parseInt(value);
+
+    switch (op) {
+        case '<': return { rating, min: 1, max: value - 1 };
+        case '<=': return { rating, min: 1, max: value };
+        case '>': return { rating, min: value + 1, max: 4000 };
+        case '>=': return { rating, min: value, max: 4000 };
+        default: return null;
+    }
+}
+
+function calc(inequalities) {
+    let ranges = { x: [1, 4000], m: [1, 4000], a: [1, 4000], s: [1, 4000] };
+
+    for (let inequality of inequalities) {
+        let parsed = parse(inequality);
+
+        if (!parsed) {
+            continue;
+        };
+
+        let { rating, min, max } = parsed;
+        
+        ranges[rating][0] = Math.max(ranges[rating][0], min);
+        ranges[rating][1] = Math.min(ranges[rating][1], max);
+
+        if (ranges[rating][0] > ranges[rating][1]) {
+            return 0;
+        }
+    }
+
+    return Object.values(ranges).reduce((total, [min, max]) => total * (max - min + 1), 1);
+}
+
+let results = inequalities.map(calc);
+console.log(results.reduce((acc, val) => acc += val, 0));
+//138625360533574
