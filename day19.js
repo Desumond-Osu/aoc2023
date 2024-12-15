@@ -80,18 +80,18 @@ function swapSign(rule) {
 function parse(inequality) {
     let match = inequality.match(/^([a-z])([<>]=?)(\d+)$/);
     if (!match) {
-        return null
-    };
+        return null;
+    }
     
-    let [_, rating, op, value] = match;
-    value = parseInt(value);
+    let [_, rating, sign, value] = match;
+    value = +value;
 
-    switch (op) {
-        case '<': return { rating, min: 1, max: value - 1 };
-        case '<=': return { rating, min: 1, max: value };
-        case '>': return { rating, min: value + 1, max: 4000 };
-        case '>=': return { rating, min: value, max: 4000 };
-        default: return null;
+    switch (sign) {
+        case '<' : return [rating,         1, value - 1];
+        case '<=': return [rating,         1,     value];
+        case '>' : return [rating, value + 1,      4000];
+        case '>=': return [rating,     value,      4000];
+        default  : return null;
     }
 }
 
@@ -105,19 +105,16 @@ function calc(inequalities) {
             continue;
         };
 
-        let { rating, min, max } = parsed;
+        let [rating, min, max] = parsed;
         
-        ranges[rating][0] = Math.max(ranges[rating][0], min);
-        ranges[rating][1] = Math.min(ranges[rating][1], max);
+        ranges[rating] = [Math.max(ranges[rating][0], min), Math.min(ranges[rating][1], max)];
 
         if (ranges[rating][0] > ranges[rating][1]) {
             return 0;
         }
     }
 
-    return Object.values(ranges).reduce((total, [min, max]) => total * (max - min + 1), 1);
+    return Object.values(ranges).reduce((acc, [min, max]) => acc * (max - min + 1), 1);
 }
 
-let results = inequalities.map(calc);
-console.log(results.reduce((acc, val) => acc += val, 0));
-//138625360533574
+console.log(inequalities.map(calc).reduce((acc, val) => acc + val, 0));
